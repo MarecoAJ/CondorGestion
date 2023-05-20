@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="277"/>
+	<property name="ireport.y" value="2"/>
+	<parameter name="TipoPago" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FecIni" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="FecFin" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     detallesdecaja.`iuCaja` AS detallesdecaja_iuCaja,
+     detallesdecaja.`iuDetalleCaja` AS detallesdecaja_iuDetalleCaja,
+     detallesdecaja.`iuTipoPago` AS detallesdecaja_iuTipoPago,
+     detallesdecaja.`subTotal` AS detallesdecaja_subTotal,
+     detallesdecaja.`fechaInsercion` AS detallesdecaja_fechaInsercion,
+     detallesdecaja.`estadoEliminacion` AS detallesdecaja_estadoEliminacion,
+     tipopagos.`iuTipoPago` AS tipopagos_iuTipoPago,
+     tipopagos.`descrTipoPago` AS tipopagos_descrTipoPago,
+     tipopagos.`fechaInsercion` AS tipopagos_fechaInsercion,
+     tipopagos.`estadoEliminacion` AS tipopagos_estadoEliminacion
+FROM
+     `tipopagos` tipopagos INNER JOIN `detallesdecaja` detallesdecaja ON tipopagos.`iuTipoPago` = detallesdecaja.`iuTipoPago`
+WHERE
+     detallesdecaja.`estadoEliminacion`=1 AND detallesdecaja.`iuTipoPago` = $P{TipoPago}
+ AND detallesdecaja.`fechaInsercion` BETWEEN $P{FecIni} AND $P{FecFin}]]>
+	</queryString>
+	<field name="detallesdecaja_iuCaja" class="java.lang.Integer"/>
+	<field name="detallesdecaja_iuDetalleCaja" class="java.lang.Integer"/>
+	<field name="detallesdecaja_iuTipoPago" class="java.lang.Integer"/>
+	<field name="detallesdecaja_subTotal" class="java.lang.Double"/>
+	<field name="detallesdecaja_fechaInsercion" class="java.sql.Timestamp"/>
+	<field name="detallesdecaja_estadoEliminacion" class="java.lang.Integer"/>
+	<field name="tipopagos_iuTipoPago" class="java.lang.Integer"/>
+	<field name="tipopagos_descrTipoPago" class="java.lang.String"/>
+	<field name="tipopagos_fechaInsercion" class="java.sql.Timestamp"/>
+	<field name="tipopagos_estadoEliminacion" class="java.lang.Integer"/>
+	<variable name="detallesdecaja_subTotal_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{detallesdecaja_subTotal}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="179" height="79"/>
+				<imageExpression><![CDATA["C:\\CondorGestion\\fondos\\logoInformes.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="179" y="0" width="376" height="79" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Open Sans" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ventas]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="27" splitType="Stretch">
+			<textField>
+				<reportElement x="235" y="0" width="100" height="27" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Open Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FecFin}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="0" width="100" height="27" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Open Sans" size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FecIni}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="110" height="27" />
+				<textElement verticalAlignment="Middle">
+					<font fontName="Open Sans" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periodo entre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="0" width="25" height="27" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Open Sans" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[y]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="476" y="0" width="79" height="27" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Open Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipopagos_descrTipoPago}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="369" y="0" width="107" height="27" />
+				<textElement verticalAlignment="Middle">
+					<font fontName="Open Sans" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de pago]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="21" width="555" height="1" />
+			</line>
+			<staticText>
+				<reportElement x="0" y="2" width="100" height="20" />
+				<textElement>
+					<font fontName="Open Sans" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° de caja]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="204" y="2" width="100" height="20"/>
+				<textElement>
+					<font fontName="Open Sans" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° de detalle de caja]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="2" width="100" height="20" />
+				<textElement>
+					<font fontName="Open Sans" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Subtotal]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="6" width="100" height="20" />
+				<textFieldExpression><![CDATA[$F{detallesdecaja_iuCaja}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="204" y="6" width="100" height="20" />
+				<textFieldExpression><![CDATA[$F{detallesdecaja_iuDetalleCaja}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="6" width="100" height="20" />
+				<textFieldExpression><![CDATA[$F{detallesdecaja_subTotal}.toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="23" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" />
+			</line>
+			<staticText>
+				<reportElement x="407" y="3" width="48" height="20" />
+				<textElement verticalAlignment="Middle">
+					<font fontName="Open Sans" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="23" />
+				<textElement verticalAlignment="Middle">
+					<font fontName="Open Sans" size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{detallesdecaja_subTotal_1}.toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="455" y="1" width="100" height="20" />
+				<textElement>
+					<font fontName="Open Sans" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="1" width="100" height="20" />
+				<textElement>
+					<font fontName="Open Sans" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date().toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

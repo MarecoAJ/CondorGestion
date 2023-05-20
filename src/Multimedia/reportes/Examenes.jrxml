@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Examenes" pageWidth="170" pageHeight="339" columnWidth="154" leftMargin="8" rightMargin="8" topMargin="8" bottomMargin="8" >
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="480"/>
+	<parameter name="numExamenVeh" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     examenvehiculo.`numExamenVeh` AS examenvehiculo_numExamenVeh,
+     examenvehiculo.`nombExaminador` AS examenvehiculo_nombExaminador,
+     examenvehiculo.`dominioVeh` AS examenvehiculo_dominioVeh,
+     examenvehiculo.`posibleRetirador` AS examenvehiculo_posibleRetirador,
+     cartera.`iuCartera` AS cartera_iuCartera,
+     cartera.`nombCompleto` AS cartera_nombCompleto,
+     examenvehiculo.`iuCartera` AS examenvehiculo_iuCartera,
+     examenvehiculo.`fechaExamen` AS examenvehiculo_fechaExamen,
+     examenvehiculo.`estadoEliminacion` AS examenvehiculo_estadoEliminacion,
+     examenvehiculo.`fechaInsercion` AS examenvehiculo_fechaInsercion
+FROM
+     `cartera` cartera INNER JOIN `examenvehiculo` examenvehiculo ON cartera.`iuCartera` = examenvehiculo.`iuCartera`
+WHERE
+     examenvehiculo.`estadoEliminacion`= 1 AND examenvehiculo.`numExamenVeh` = $P{numExamenVeh}]]>
+	</queryString>
+	<field name="examenvehiculo_numExamenVeh" class="java.lang.Integer"/>
+	<field name="examenvehiculo_nombExaminador" class="java.lang.String"/>
+	<field name="examenvehiculo_dominioVeh" class="java.lang.String"/>
+	<field name="examenvehiculo_posibleRetirador" class="java.lang.String"/>
+	<field name="cartera_iuCartera" class="java.lang.Integer"/>
+	<field name="cartera_nombCompleto" class="java.lang.String"/>
+	<field name="examenvehiculo_iuCartera" class="java.lang.Integer"/>
+	<field name="examenvehiculo_fechaExamen" class="java.lang.String"/>
+	<field name="examenvehiculo_estadoEliminacion" class="java.lang.Integer"/>
+	<field name="examenvehiculo_fechaInsercion" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="20" width="154" height="20" />
+				<textElement textAlignment="Center">
+					<font fontName="Open Sans" size="6"/>
+				</textElement>
+				<text><![CDATA[Av. Hipolito Yrigoyen 862]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="154" height="20" />
+				<textElement textAlignment="Center">
+					<font fontName="Open Sans" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Eldorado parabrisas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="154" height="20" />
+				<textElement textAlignment="Center">
+					<font fontName="Open Sans" size="6"/>
+				</textElement>
+				<text><![CDATA[TEL.: 3751-441030]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="59" width="154" height="1" />
+			</line>
+		</band>
+	</title>
+	<detail>
+		<band height="252" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="25" width="154" height="1" />
+			</line>
+			<staticText>
+				<reportElement x="0" y="9" width="154" height="16" />
+				<textElement textAlignment="Center">
+					<font fontName="Open Sans" size="4" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[COMPROBANTE DE EXAMEN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="26" width="64" height="10" />
+				<textElement>
+					<font fontName="Open Sans" size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nº de examen:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="37" width="35" height="11" />
+				<textElement>
+					<font fontName="Open Sans" size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="48" width="54" height="19" />
+				<textElement verticalAlignment="Middle">
+					<font fontName="Open Sans" size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Examinador:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="67" width="154" height="1" />
+			</line>
+			<staticText>
+				<reportElement x="0" y="68" width="35" height="20" />
+				<textElement verticalAlignment="Middle">
+					<font fontName="Open Sans" size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lo trajo:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="88" width="35" height="20" />
+				<textElement verticalAlignment="Middle">
+					<font fontName="Open Sans" size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dominio:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="108" width="100" height="20" />
+				<textElement verticalAlignment="Middle">
+					<font fontName="Open Sans" size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tambien lo puede retirar:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="64" y="24" width="90" height="12" />
+				<textElement>
+					<font fontName="Open Sans" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{examenvehiculo_numExamenVeh}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="54" y="48" width="100" height="19" />
+				<textElement verticalAlignment="Middle">
+					<font fontName="Open Sans" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{examenvehiculo_nombExaminador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="35" y="68" width="119" height="20" />
+				<textElement verticalAlignment="Middle">
+					<font fontName="Open Sans" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cartera_nombCompleto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="35" y="88" width="119" height="20" />
+				<textElement verticalAlignment="Middle">
+					<font fontName="Open Sans" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{examenvehiculo_dominioVeh}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="208" width="100" height="20" />
+				<textElement>
+					<font fontName="Open Sans" size="4" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Detalles:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="128" width="154" height="13" />
+				<textElement>
+					<font fontName="Open Sans" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{examenvehiculo_posibleRetirador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="35" y="37" width="119" height="11" />
+				<textElement>
+					<font fontName="Open Sans" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{examenvehiculo_fechaExamen}]]></textFieldExpression>
+			</textField>
+			<elementGroup/>
+			<image>
+				<reportElement x="40" y="141" width="70" height="67" />
+				<imageExpression><![CDATA["C:\\CondorGestion\\fondos\\detalleCoche70x70.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="1">
+			<line>
+				<reportElement x="0" y="0" width="154" height="1" />
+			</line>
+		</band>
+	</pageFooter>
+</jasperReport>

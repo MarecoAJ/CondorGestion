@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="170" pageHeight="340" columnWidth="154" leftMargin="8" rightMargin="8" topMargin="8" bottomMargin="8" >
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="iuPresup" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     presupuesto.`iuPresupuesto` AS presupuesto_iuPresupuesto,
+     presupuesto.`fechaPresup` AS presupuesto_fechaPresup,
+     presupuesto.`tipoPresup` AS presupuesto_tipoPresup,
+     presupuesto.`dirigidoA` AS presupuesto_dirigidoA,
+     presupuesto.`codModeloVeh` AS presupuesto_codModeloVeh,
+     presupuesto.`patenteVeh` AS presupuesto_patenteVeh,
+     presupuesto.`codigoCristal` AS presupuesto_codigoCristal,
+     presupuesto.`iuMarcaCris` AS presupuesto_iuMarcaCris,
+     presupuesto.`iuServicios` AS presupuesto_iuServicios,
+     presupuesto.`descrPresup` AS presupuesto_descrPresup,
+     presupuesto.`totalPresup` AS presupuesto_totalPresup,
+     presupuesto.`fechaInsercion` AS presupuesto_fechaInsercion,
+     presupuesto.`estadoEliminacion` AS presupuesto_estadoEliminacion,
+     serviciosprestados.`iuServicios` AS serviciosprestados_iuServicios,
+     serviciosprestados.`descrServicios` AS serviciosprestados_descrServicios,
+     serviciosprestados.`precioServ` AS serviciosprestados_precioServ,
+     serviciosprestados.`fechaInsercion` AS serviciosprestados_fechaInsercion,
+     serviciosprestados.`estadoEliminacion` AS serviciosprestados_estadoEliminacion,
+     modelovehiculo.`codModeloVeh` AS modelovehiculo_codModeloVeh,
+     modelovehiculo.`codMarcaVeh` AS modelovehiculo_codMarcaVeh,
+     modelovehiculo.`descrModeloVeh` AS modelovehiculo_descrModeloVeh,
+     modelovehiculo.`fechaInsercion` AS modelovehiculo_fechaInsercion,
+     modelovehiculo.`estadoEliminacion` AS modelovehiculo_estadoEliminacion,
+     marcavehiculo.`codMarcaVeh` AS marcavehiculo_codMarcaVeh,
+     marcavehiculo.`descrMarcaVeh` AS marcavehiculo_descrMarcaVeh,
+     marcavehiculo.`fechaInsercion` AS marcavehiculo_fechaInsercion,
+     marcavehiculo.`estadoEliminacion` AS marcavehiculo_estadoEliminacion,
+     marcacristales.`iuMarcaCris` AS marcacristales_iuMarcaCris,
+     marcacristales.`descrMarcaCris` AS marcacristales_descrMarcaCris,
+     marcacristales.`fechaInsercion` AS marcacristales_fechaInsercion,
+     marcacristales.`estadoEliminacion` AS marcacristales_estadoEliminacion,
+     catalogocristales.`codigoCristal` AS catalogocristales_codigoCristal,
+     catalogocristales.`codModeloVeh` AS catalogocristales_codModeloVeh,
+     catalogocristales.`iuMarcaCris` AS catalogocristales_iuMarcaCris,
+     catalogocristales.`descrCristal` AS catalogocristales_descrCristal,
+     catalogocristales.`cantidadMinima` AS catalogocristales_cantidadMinima,
+     catalogocristales.`cantidadExistencia` AS catalogocristales_cantidadExistencia,
+     catalogocristales.`precioPieza` AS catalogocristales_precioPieza,
+     catalogocristales.`fechaInsercion` AS catalogocristales_fechaInsercion,
+     catalogocristales.`estadoEliminacion` AS catalogocristales_estadoEliminacion
+FROM
+     `serviciosprestados` serviciosprestados INNER JOIN `presupuesto` presupuesto ON serviciosprestados.`iuServicios` = presupuesto.`iuServicios`
+     INNER JOIN `catalogocristales` catalogocristales ON presupuesto.`codModeloVeh` = catalogocristales.`codModeloVeh`
+     AND catalogocristales.`iuMarcaCris` = presupuesto.`iuMarcaCris`
+     AND catalogocristales.`codigoCristal` = presupuesto.`codigoCristal`
+     INNER JOIN `modelovehiculo` modelovehiculo ON catalogocristales.`codModeloVeh` = modelovehiculo.`codModeloVeh`
+     INNER JOIN `marcacristales` marcacristales ON catalogocristales.`iuMarcaCris` = marcacristales.`iuMarcaCris`
+     INNER JOIN `marcavehiculo` marcavehiculo ON modelovehiculo.`codMarcaVeh` = marcavehiculo.`codMarcaVeh`
+WHERE
+ presupuesto.`estadoEliminacion`=1 AND presupuesto.`iuPresupuesto`= $P{iuPresup}]]>
+	</queryString>
+	<field name="presupuesto_iuPresupuesto" class="java.lang.Integer"/>
+	<field name="presupuesto_fechaPresup" class="java.lang.String"/>
+	<field name="presupuesto_tipoPresup" class="java.lang.String"/>
+	<field name="presupuesto_dirigidoA" class="java.lang.String"/>
+	<field name="presupuesto_codModeloVeh" class="java.lang.String"/>
+	<field name="presupuesto_patenteVeh" class="java.lang.String"/>
+	<field name="presupuesto_codigoCristal" class="java.lang.String"/>
+	<field name="presupuesto_iuMarcaCris" class="java.lang.Integer"/>
+	<field name="presupuesto_iuServicios" class="java.lang.Integer"/>
+	<field name="presupuesto_descrPresup" class="java.lang.String"/>
+	<field name="presupuesto_totalPresup" class="java.lang.Double"/>
+	<field name="presupuesto_fechaInsercion" class="java.sql.Timestamp"/>
+	<field name="presupuesto_estadoEliminacion" class="java.lang.Integer"/>
+	<field name="serviciosprestados_iuServicios" class="java.lang.Integer"/>
+	<field name="serviciosprestados_descrServicios" class="java.lang.String"/>
+	<field name="serviciosprestados_precioServ" class="java.lang.Double"/>
+	<field name="serviciosprestados_fechaInsercion" class="java.sql.Timestamp"/>
+	<field name="serviciosprestados_estadoEliminacion" class="java.lang.Integer"/>
+	<field name="modelovehiculo_codModeloVeh" class="java.lang.String"/>
+	<field name="modelovehiculo_codMarcaVeh" class="java.lang.String"/>
+	<field name="modelovehiculo_descrModeloVeh" class="java.lang.String"/>
+	<field name="modelovehiculo_fechaInsercion" class="java.sql.Timestamp"/>
+	<field name="modelovehiculo_estadoEliminacion" class="java.lang.Integer"/>
+	<field name="marcavehiculo_codMarcaVeh" class="java.lang.String"/>
+	<field name="marcavehiculo_descrMarcaVeh" class="java.lang.String"/>
+	<field name="marcavehiculo_fechaInsercion" class="java.sql.Timestamp"/>
+	<field name="marcavehiculo_estadoEliminacion" class="java.lang.Integer"/>
+	<field name="marcacristales_iuMarcaCris" class="java.lang.Integer"/>
+	<field name="marcacristales_descrMarcaCris" class="java.lang.String"/>
+	<field name="marcacristales_fechaInsercion" class="java.sql.Timestamp"/>
+	<field name="marcacristales_estadoEliminacion" class="java.lang.Integer"/>
+	<field name="catalogocristales_codigoCristal" class="java.lang.String"/>
+	<field name="catalogocristales_codModeloVeh" class="java.lang.String"/>
+	<field name="catalogocristales_iuMarcaCris" class="java.lang.Integer"/>
+	<field name="catalogocristales_descrCristal" class="java.lang.String"/>
+	<field name="catalogocristales_cantidadMinima" class="java.lang.Integer"/>
+	<field name="catalogocristales_cantidadExistencia" class="java.lang.Integer"/>
+	<field name="catalogocristales_precioPieza" class="java.math.BigDecimal"/>
+	<field name="catalogocristales_fechaInsercion" class="java.sql.Timestamp"/>
+	<field name="catalogocristales_estadoEliminacion" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="20" width="154" height="20" />
+				<textElement textAlignment="Center">
+					<font fontName="Open Sans" size="6"/>
+				</textElement>
+				<text><![CDATA[Av. Hipolito Yrigoyen 862]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="154" height="20" />
+				<textElement textAlignment="Center">
+					<font fontName="Open Sans" size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Eldorado parabrisas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="154" height="20" />
+				<textElement textAlignment="Center">
+					<font fontName="Open Sans" size="6"/>
+				</textElement>
+				<text><![CDATA[TEL.: 3751-441030]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="12" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="28" height="11" />
+				<textElement>
+					<font fontName="Open Sans" size="3" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PPTT Nº:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="28" y="0" width="19" height="11" />
+				<textElement>
+					<font fontName="Open Sans" size="3" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{presupuesto_iuPresupuesto}.toString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="47" y="0" width="40" height="11" />
+				<textElement>
+					<font fontName="Open Sans" size="3" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="87" y="0" width="67" height="11" />
+				<textElement>
+					<font fontName="Open Sans" size="3" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{presupuesto_fechaPresup}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="11" width="154" height="1" />
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="207" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="65" height="10" />
+				<textElement>
+					<font fontName="Open Sans" size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dirigido a:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="65" y="10" width="89" height="10" />
+				<textElement>
+					<font fontName="Open Sans" size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{presupuesto_dirigidoA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="34" width="100" height="14" />
+				<textElement>
+					<font fontName="Open Sans" size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reparacion para:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="58" width="76" height="14" />
+				<textElement textAlignment="Center">
+					<font fontName="Open Sans" size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{marcavehiculo_descrMarcaVeh}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="76" y="58" width="78" height="14" />
+				<textElement textAlignment="Center">
+					<font fontName="Open Sans" size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{modelovehiculo_descrModeloVeh}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="82" width="65" height="10" />
+				<textElement>
+					<font fontName="Open Sans" size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[con dominio]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="65" y="82" width="89" height="10" />
+				<textElement>
+					<font fontName="Open Sans" size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{presupuesto_patenteVeh}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="102" width="76" height="10" />
+				<textElement>
+					<font fontName="Open Sans" size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[para el cristal]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="76" y="102" width="78" height="10" />
+				<textElement>
+					<font fontName="Open Sans" size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{catalogocristales_descrCristal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="126" width="87" height="10" />
+				<textElement>
+					<font fontName="Open Sans" size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[con servicio de]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="87" y="126" width="67" height="10" />
+				<textElement>
+					<font fontName="Open Sans" size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{serviciosprestados_descrServicios}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="151" width="65" height="11" />
+				<textElement>
+					<font fontName="Open Sans" size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[de la marca]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="65" y="151" width="89" height="11" />
+				<textElement>
+					<font fontName="Open Sans" size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{marcacristales_descrMarcaCris}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="173" width="154" height="12" />
+				<textElement textAlignment="Center">
+					<font fontName="Open Sans" size="5"/>
+				</textElement>
+				<text><![CDATA[Descripcion:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="185" width="154" height="11" />
+				<textElement>
+					<font fontName="Open Sans" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{presupuesto_descrPresup}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="28" y="196" width="37" height="10" />
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Open Sans" size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="65" y="196" width="89" height="10" />
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Open Sans" size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{presupuesto_totalPresup}.toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="1" width="154" height="30" />
+				<textElement textAlignment="Center">
+					<font fontName="Open Sans" size="4"/>
+				</textElement>
+				<text><![CDATA[Este documento preséntelo el día indicado. En caso de no tenerlo corrobore su turno con el dominio del vehículo.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="154" height="1" />
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

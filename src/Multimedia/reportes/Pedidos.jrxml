@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pedidos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" >
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="496"/>
+	<property name="ireport.y" value="66"/>
+	<parameter name="fechaPedido" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="marcaCristal" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     pedidos.`fechaPedido` AS pedidos_fechaPedido,
+     pedidos.`codigoCristal` AS pedidos_codigoCristal,
+     pedidos.`codModeloVeh` AS pedidos_codModeloVeh,
+     pedidos.`iuMarcaCris` AS pedidos_iuMarcaCris,
+     pedidos.`cantidadPieza` AS pedidos_cantidadPieza,
+     pedidos.`fechaInsercion` AS pedidos_fechaInsercion,
+     pedidos.`estadoEliminacion` AS pedidos_estadoEliminacion,
+     catalogocristales.`codigoCristal` AS catalogocristales_codigoCristal,
+     catalogocristales.`codModeloVeh` AS catalogocristales_codModeloVeh,
+     catalogocristales.`iuMarcaCris` AS catalogocristales_iuMarcaCris,
+     catalogocristales.`descrCristal` AS catalogocristales_descrCristal,
+     catalogocristales.`cantidadMinima` AS catalogocristales_cantidadMinima,
+     catalogocristales.`cantidadExistencia` AS catalogocristales_cantidadExistencia,
+     catalogocristales.`precioPieza` AS catalogocristales_precioPieza,
+     catalogocristales.`fechaInsercion` AS catalogocristales_fechaInsercion,
+     catalogocristales.`estadoEliminacion` AS catalogocristales_estadoEliminacion,
+     modelovehiculo.`codModeloVeh` AS modelovehiculo_codModeloVeh,
+     modelovehiculo.`codMarcaVeh` AS modelovehiculo_codMarcaVeh,
+     modelovehiculo.`descrModeloVeh` AS modelovehiculo_descrModeloVeh,
+     modelovehiculo.`fechaInsercion` AS modelovehiculo_fechaInsercion,
+     modelovehiculo.`estadoEliminacion` AS modelovehiculo_estadoEliminacion,
+     marcavehiculo.`codMarcaVeh` AS marcavehiculo_codMarcaVeh,
+     marcavehiculo.`descrMarcaVeh` AS marcavehiculo_descrMarcaVeh,
+     marcavehiculo.`fechaInsercion` AS marcavehiculo_fechaInsercion,
+     marcavehiculo.`estadoEliminacion` AS marcavehiculo_estadoEliminacion,
+     marcacristales.`iuMarcaCris` AS marcacristales_iuMarcaCris,
+     marcacristales.`descrMarcaCris` AS marcacristales_descrMarcaCris,
+     marcacristales.`fechaInsercion` AS marcacristales_fechaInsercion,
+     marcacristales.`estadoEliminacion` AS marcacristales_estadoEliminacion
+FROM
+     `catalogocristales` catalogocristales INNER JOIN `pedidos` pedidos ON catalogocristales.`codigoCristal` = pedidos.`codigoCristal`
+     AND catalogocristales.`iuMarcaCris` = pedidos.`iuMarcaCris`
+     AND catalogocristales.`codModeloVeh` = pedidos.`codModeloVeh`
+     INNER JOIN `modelovehiculo` modelovehiculo ON catalogocristales.`codModeloVeh` = modelovehiculo.`codModeloVeh`
+     INNER JOIN `marcacristales` marcacristales ON catalogocristales.`iuMarcaCris` = marcacristales.`iuMarcaCris`
+     INNER JOIN `marcavehiculo` marcavehiculo ON modelovehiculo.`codMarcaVeh` = marcavehiculo.`codMarcaVeh`
+WHERE
+	pedidos.`estadoEliminacion`= 1 AND pedidos.`fechaPedido`= $P{fechaPedido}
+ AND pedidos.`iuMarcaCris`= $P{marcaCristal}]]>
+	</queryString>
+	<field name="pedidos_fechaPedido" class="java.lang.String"/>
+	<field name="pedidos_codigoCristal" class="java.lang.String"/>
+	<field name="pedidos_codModeloVeh" class="java.lang.String"/>
+	<field name="pedidos_iuMarcaCris" class="java.lang.Integer"/>
+	<field name="pedidos_cantidadPieza" class="java.lang.Integer"/>
+	<field name="pedidos_fechaInsercion" class="java.sql.Timestamp"/>
+	<field name="pedidos_estadoEliminacion" class="java.lang.Integer"/>
+	<field name="catalogocristales_codigoCristal" class="java.lang.String"/>
+	<field name="catalogocristales_codModeloVeh" class="java.lang.String"/>
+	<field name="catalogocristales_iuMarcaCris" class="java.lang.Integer"/>
+	<field name="catalogocristales_descrCristal" class="java.lang.String"/>
+	<field name="catalogocristales_cantidadMinima" class="java.lang.Integer"/>
+	<field name="catalogocristales_cantidadExistencia" class="java.lang.Integer"/>
+	<field name="catalogocristales_precioPieza" class="java.math.BigDecimal"/>
+	<field name="catalogocristales_fechaInsercion" class="java.sql.Timestamp"/>
+	<field name="catalogocristales_estadoEliminacion" class="java.lang.Integer"/>
+	<field name="modelovehiculo_codModeloVeh" class="java.lang.String"/>
+	<field name="modelovehiculo_codMarcaVeh" class="java.lang.String"/>
+	<field name="modelovehiculo_descrModeloVeh" class="java.lang.String"/>
+	<field name="modelovehiculo_fechaInsercion" class="java.sql.Timestamp"/>
+	<field name="modelovehiculo_estadoEliminacion" class="java.lang.Integer"/>
+	<field name="marcavehiculo_codMarcaVeh" class="java.lang.String"/>
+	<field name="marcavehiculo_descrMarcaVeh" class="java.lang.String"/>
+	<field name="marcavehiculo_fechaInsercion" class="java.sql.Timestamp"/>
+	<field name="marcavehiculo_estadoEliminacion" class="java.lang.Integer"/>
+	<field name="marcacristales_iuMarcaCris" class="java.lang.Integer"/>
+	<field name="marcacristales_descrMarcaCris" class="java.lang.String"/>
+	<field name="marcacristales_fechaInsercion" class="java.sql.Timestamp"/>
+	<field name="marcacristales_estadoEliminacion" class="java.lang.Integer"/>
+	<variable name="pedidos_cantidadPieza_1" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{pedidos_cantidadPieza}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="170" y="0" width="385" height="79" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Open Sans" size="16" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Pedido]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="170" height="79" />
+				<imageExpression><![CDATA["C:\\CondorGestion\\fondos\\logoInformes.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="149" height="35" />
+				<textElement verticalAlignment="Middle">
+					<font fontName="Open Sans" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha del pedido:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="269" y="0" width="165" height="35" />
+				<textElement verticalAlignment="Middle">
+					<font fontName="Open Sans" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Marca o proveedor:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="149" y="0" width="120" height="35" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Open Sans" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pedidos_fechaPedido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="434" y="0" width="121" height="35" />
+				<textElement verticalAlignment="Middle">
+					<font fontName="Open Sans" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{marcacristales_descrMarcaCris}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="0" width="100" height="20" />
+				<textElement>
+					<font fontName="Open Sans" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Codigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="157" y="0" width="100" height="20" />
+				<textElement>
+					<font fontName="Open Sans" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Marca]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="306" y="0" width="100" height="20" />
+				<textElement>
+					<font fontName="Open Sans" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Modelo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="0" width="100" height="20" />
+				<textElement>
+					<font fontName="Open Sans" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" />
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="0" width="100" height="20" />
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pedidos_codigoCristal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="157" y="0" width="100" height="20" />
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{modelovehiculo_codMarcaVeh}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="306" y="0" width="100" height="20" />
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pedidos_codModeloVeh}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" />
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pedidos_cantidadPieza}.toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="28" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" />
+			</line>
+			<staticText>
+				<reportElement x="406" y="3" width="49" height="20" />
+				<textElement verticalAlignment="Middle">
+					<font fontName="Open Sans" size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="455" y="3" width="100" height="20" />
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Open Sans" size="5" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{pedidos_cantidadPieza_1}.toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="0" width="228" height="20" />
+				<textElement>
+					<font fontName="Open Sans" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date().toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" />
+				<textElement>
+					<font fontName="Open Sans" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}.toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
